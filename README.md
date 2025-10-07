@@ -48,7 +48,7 @@ make all
 To run a specific test:
 
 ```bash
-./[Test_file_name]
+./Test_file_name
 ```
 To clean up all compiled object files and executables:
 ```bash
