@@ -7,97 +7,32 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <!-- Include the TCC-JS compiler library -->
+    <script src="https://cdn.jsdelivr.net/npm/tcc-js@0.0.12/dist/tcc-js.js"></script>
     <style>
-        /* CSS Variables for easy theme management */
         :root {
-            --primary-color: #4A90E2; /* A softer, professional blue */
+            --primary-color: #4A90E2;
             --primary-hover: #357ABD;
-            --bg-color: #F5F7FA; /* Light, clean background */
+            --bg-color: #F5F7FA;
             --section-bg: #ffffff;
-            --text-color: #4A4A4A; /* Softer than black */
+            --text-color: #4A4A4A;
             --heading-color: #2c3e50;
             --border-color: #E4E7EB;
             --code-bg: #282c34;
             --code-text: #abb2bf;
         }
-
-        /* General Styling & Typography */
-        html {
-            scroll-behavior: smooth;
-        }
-        body { 
-            font-family: 'Roboto', sans-serif;
-            line-height: 1.7; 
-            margin: 0; 
-            padding: 0; 
-            background-color: var(--bg-color); 
-            color: var(--text-color); 
-        }
-        .container { 
-            max-width: 1200px; 
-            margin: auto; 
-            padding: 0 2rem; 
-        }
-        h1, h2, h3, h4 {
-            font-family: 'Poppins', sans-serif;
-            color: var(--heading-color);
-            font-weight: 600;
-        }
-
-        /* Keyframes for Animations */
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Header */
-        header { 
-            background: var(--section-bg); 
-            padding: 3rem 0; 
-            text-align: center; 
-            border-bottom: 1px solid var(--border-color);
-            overflow: hidden;
-        }
-        header h1 { 
-            margin: 0; 
-            font-size: 3rem; 
-            font-weight: 700;
-            color: var(--heading-color);
-            animation: fadeInUp 0.8s ease-out both;
-        }
-        header p { 
-            margin: 0.5rem 0 0; 
-            font-size: 1.25rem; 
-            color: #7f8c9b;
-            animation: fadeInUp 0.8s ease-out 0.2s both;
-        }
-
-        /* Sections & On-Scroll Animation */
-        .section { 
-            background: var(--section-bg); 
-            margin: 2.5rem 0; 
-            padding: 3rem; 
-            border-radius: 12px; 
-            box-shadow: 0 10px 40px rgba(0,0,0,0.07);
-            border: 1px solid var(--border-color);
-        }
-        .fade-in-section {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-        }
-        .fade-in-section.is-visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        .section h2 { 
-            font-size: 2.2rem;
-            color: var(--primary-color); 
-            border-bottom: 2px solid var(--border-color); 
-            padding-bottom: 1rem; 
-            margin-top: 0; 
-            margin-bottom: 2rem;
-        }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Roboto', sans-serif; line-height: 1.7; margin: 0; padding: 0; background-color: var(--bg-color); color: var(--text-color); }
+        .container { max-width: 1200px; margin: auto; padding: 0 2rem; }
+        h1, h2, h3, h4 { font-family: 'Poppins', sans-serif; color: var(--heading-color); font-weight: 600; }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        header { background: var(--section-bg); padding: 3rem 0; text-align: center; border-bottom: 1px solid var(--border-color); overflow: hidden; }
+        header h1 { margin: 0; font-size: 3rem; font-weight: 700; color: var(--heading-color); animation: fadeInUp 0.8s ease-out both; }
+        header p { margin: 0.5rem 0 0; font-size: 1.25rem; color: #7f8c9b; animation: fadeInUp 0.8s ease-out 0.2s both; }
+        .section { background: var(--section-bg); margin: 2.5rem 0; padding: 3rem; border-radius: 12px; box-shadow: 0 10px 40px rgba(0,0,0,0.07); border: 1px solid var(--border-color); }
+        .fade-in-section { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
+        .fade-in-section.is-visible { opacity: 1; transform: translateY(0); }
+        .section h2 { font-size: 2.2rem; color: var(--primary-color); border-bottom: 2px solid var(--border-color); padding-bottom: 1rem; margin-top: 0; margin-bottom: 2rem; }
         .overview-section .content-wrapper { max-width: 800px; margin: 0 auto; }
         .overview-section p { margin-bottom: 1.25rem; font-size: 1.1rem; }
         .overview-section h3 { color: var(--heading-color); margin-top: 2rem; font-size: 1.6rem; }
@@ -105,16 +40,12 @@
         .test-desc h4 { margin: 0 0 0.5rem 0; font-size: 1.2rem; }
         .cite-link { color: var(--primary-color); font-weight: 600; text-decoration: none; transition: color 0.2s; }
         .cite-link:hover { color: var(--primary-hover); text-decoration: underline; }
-        
-        /* Code Showcase */
         .code-showcase h3 { color: var(--heading-color); font-size: 1.4rem; margin-bottom: 1rem; }
         .tabs { display: flex; flex-wrap: wrap; border-bottom: 2px solid var(--border-color); }
         .tab-button { padding: 14px 20px; cursor: pointer; background: none; color: #6c757d; border: none; font-size: 1rem; font-weight: 500; transition: all 0.2s; border-bottom: 3px solid transparent; margin-bottom: -2px; }
         .tab-button.active, .tab-button:hover { color: var(--primary-color); border-bottom: 3px solid var(--primary-color); }
         .code-content { display: none; padding: 1.5rem; background: var(--code-bg); color: var(--code-text); border-radius: 0 0 8px 8px; height: 450px; overflow-y: auto; font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace; white-space: pre; font-size: 0.9rem; border: 1px solid var(--border-color); border-top: none; }
         .code-content.active { display: block; }
-        
-        /* Compiler Section */
         .compiler-controls { display: flex; gap: 1rem; align-items: center; margin-bottom: 1.5rem; }
         #test-selector { flex-grow: 1; padding: 14px; font-size: 1rem; border-radius: 8px; border: 1px solid var(--border-color); background-color: #fff; transition: border-color 0.2s, box-shadow 0.2s; }
         #test-selector:focus { outline: none; border-color: var(--primary-color); box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.25); }
@@ -122,7 +53,6 @@
         .run-button:hover { background: #218838; transform: translateY(-1px); }
         .run-button:disabled { background: #aaa; cursor: not-allowed; }
         #output { background: #212529; color: #50E3C2; padding: 1.5rem; border-radius: 8px; font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace; white-space: pre-wrap; min-height: 50px; }
-        .error-note { background-color: #FFF3CD; border: 1px solid #FFEEBA; color: #856404; border-radius: 8px; padding: 1.5rem; margin-bottom: 1.5rem; }
         footer { text-align: center; padding: 2.5rem; color: #6c757d; }
     </style>
 </head>
@@ -139,37 +69,29 @@
             <div class="content-wrapper">
                 <h3>Real-World Application & Use Cases</h3>
                 <p>
-                    In high-performance computing, standard memory allocators like `malloc()` can become a bottleneck. They are designed for general-purpose use and may not be optimized for specific memory access patterns, leading to issues like memory fragmentation and performance overhead. This project demonstrates the ability to solve this problem by building a custom, efficient memory allocator from the ground up. Such specialized allocators are critical in fields like <strong>game development</strong>, <strong>real-time operating systems</strong>, <strong>embedded systems</strong>, and <strong>high-frequency trading platforms</strong>, where predictable performance and low-latency memory management are paramount.
+                    In high-performance computing, standard memory allocators like `malloc()` can become a bottleneck. This project demonstrates the ability to solve this by building a custom, efficient memory allocator from the ground up. Such specialized allocators are critical in fields like <strong>game development</strong>, <strong>real-time operating systems</strong>, and <strong>embedded systems</strong>, where predictable performance and low-latency memory management are paramount.
                 </p>
-
                 <h3>Project Implementation in Brief</h3>
                 <p>
-                    This memory allocator was implemented in C, managing a 4096-byte static memory pool. It uses a <strong>header-based system</strong> to track metadata for each memory block, including its size and allocation status. The core allocation strategy is a <strong>first-fit algorithm</strong>, which traverses the memory pool to find the first available block that satisfies a memory request. To combat fragmentation, the `myfree()` implementation includes a <strong>coalescing mechanism</strong> that merges adjacent free blocks into a single, larger block, maximizing memory availability for future allocations.
+                    This allocator, implemented in C, manages a 4096-byte static memory pool using a <strong>header-based, first-fit algorithm</strong>. To combat fragmentation, the `myfree()` implementation includes a <strong>coalescing mechanism</strong> that merges adjacent free blocks, maximizing memory availability for future allocations.
                 </p>
-
                 <h3>Comprehensive Testing & Stress Analysis</h3>
                 <p>
-                    To ensure correctness and robustness, the allocator was subjected to a rigorous testing regimen. This multi-faceted approach validates every aspect of the allocator's functionality:
+                    To ensure correctness and robustness, the allocator was subjected to a rigorous testing regimen:
                 </p>
                 <div class="test-desc">
                     <h4>Correctness & Edge Cases:</h4>
-                    <p>A suite of targeted tests was developed to verify core requirements, as detailed in files like <a href="#code-showcase-section" class="cite-link" data-tab-name="Test1_c" data-tab-container="test-tabs">Test 1</a>, <a href="#code-showcase-section" class="cite-link" data-tab-name="Test4_2_c" data-tab-container="test-tabs">Test 4 (Part 2)</a>, and <a href="#code-showcase-section" class="cite-link" data-tab-name="Test5_c" data-tab-container="test-tabs">Test 5</a>. This suite ensures no memory overlap, proper deallocation and coalescing, robust error handling for invalid pointers, and automated memory leak detection.</p>
+                    <p>A suite of targeted tests validates core requirements, as seen in <a href="#code-showcase-section" class="cite-link" data-tab-name="Test1_c" data-tab-container="test-tabs">Test 1</a>, <a href="#code-showcase-section" class="cite-link" data-tab-name="Test4_2_c" data-tab-container="test-tabs">Test 4 (Part 2)</a>, and <a href="#code-showcase-section" class="cite-link" data-tab-name="Test5_c" data-tab-container="test-tabs">Test 5</a>. This suite ensures no memory overlap, proper deallocation, robust error handling, and automated memory leak detection.</p>
                 </div>
                  <div class="test-desc">
                     <h4>Performance & Stress Testing:</h4>
-                    <p>The <a href="#code-showcase-section" class="cite-link" data-tab-name="memgrind_c" data-tab-container="test-tabs">Stress Test (memgrind)</a> program was used to analyze the allocator's performance under various workloads. Each of the five demanding workloads was executed in a loop **50 times**, with the average completion time recorded. These tests involved up to **120 allocation/deallocation cycles** per run, simulating complex usage patterns like creating and destroying data structures to measure the allocator's efficiency and reliability under stress.</p>
+                    <p>The <a href="#code-showcase-section" class="cite-link" data-tab-name="memgrind_c" data-tab-container="test-tabs">Stress Test (memgrind)</a> program analyzes performance under various workloads. Each demanding workload was executed 50 times, with tests involving up to 120 allocation/deallocation cycles per run to measure efficiency and reliability under stress.</p>
                 </div>
-
-                <h3>Performance Improvements & Results</h3>
-                <p>
-                    By tailoring the allocation strategy and implementing immediate coalescing, this project achieves a highly efficient memory management system. The stress tests in `memgrind` demonstrate the allocator's stability and consistent performance across thousands of operations. By running each workload 50 times, the results show a reliable average execution time, proving the design is robust and avoids the performance degradation that can affect general-purpose allocators under specific, high-stress conditions. This highlights a deep understanding of low-level optimization and the ability to write performance-critical code.
-                </p>
             </div>
         </section>
 
         <section id="code-showcase-section" class="section code-showcase fade-in-section">
             <h2>Code Files</h2>
-            
             <h3>Core Files</h3>
             <div class="tabs" id="core-tabs">
                 <button class="tab-button active" onclick="openTab(event, 'mymalloc_c', 'core-tabs')">My Malloc</button>
@@ -198,139 +120,97 @@ void leak_report();
 
 void allocation(){
     if(!initialized){
-        head = (header*) heap.bytes; // the first header 
+        head = (header*) heap.bytes;
         head -&gt; size = MEMLENGTH - sizeof(header);  
         head -&gt; is_allocated = 0;  
         initialized = 1;   
         atexit(leak_report);
-
     }
 }
 
 void * mymalloc(size_t size, char *file, int line){
-
     allocation();
     header *current = head;
-
-   // making size multiple of 8
     if((size % 8) != 0){
         size = size + (8 - (size % 8));
     }
-
     while ((char*)current &lt; heap.bytes + MEMLENGTH) {
-        if((current -&gt; is_allocated) == 0 && current -&gt; size &gt;= size){ // if the current chunk is empty and enough
-            int old_size = current-&gt;size; // the size of free space
+        if((current -&gt; is_allocated) == 0 && current -&gt; size &gt;= size){
+            int old_size = current-&gt;size;
             current -&gt; size = size;
-            current -&gt; is_allocated = 1; // allocate the heap
+            current -&gt; is_allocated = 1;
             header *temp = current; 
-                // making the size left free if it is enough 
             if((old_size) &gt; (size + sizeof(header))){
-                header *next = (header *) ((char *)current + sizeof(header) + size); // from first bytes of the heap to next header by skipping header and allocated chunk
-                next -&gt; size = old_size - size - sizeof(header); // setting the rest of chunk free the size of previous free chunk - size of allocated - header
+                header *next = (header *) ((char *)current + sizeof(header) + size);
+                next -&gt; size = old_size - size - sizeof(header);
                 next -&gt; is_allocated = 0;
             }
             return (void*) ((char*)temp + sizeof(header));
         }
         current = (header *)((char *)current + (sizeof(header)) + current -&gt; size);
     }
-
     fprintf(stderr, "malloc: Unable to allocate %zu bytes (%s:%d)\n", size, file, line);
     return NULL;
 }
 
 void myfree(void *ptr, char *file, int line){
-
     allocation();
-
-    if(!ptr){
-        return;
-    }
-
-    // if the pointer is outside the heap
+    if(!ptr){ return; }
     if ((char*)ptr &lt; (heap.bytes + sizeof(header)) || (char*)ptr &gt;= (heap.bytes + MEMLENGTH)) {
-
         fprintf(stderr, "free: Inappropriate pointer (%s:%d)\n", file, line);
         exit(2);
     }
-
-    // if the pointer is not pointing to start of the chunk
     header *r = head;
     int is_in = 0;
     while((char*)r &lt; heap.bytes + MEMLENGTH){
         if ((char*)r + sizeof(header) == (char*)ptr){
-                is_in = 1;
-                break;
+            is_in = 1;
+            break;
         }
-    r = (header *)((char*)r + sizeof(header) + r -&gt; size);
-
+        r = (header *)((char*)r + sizeof(header) + r -&gt; size);
     }
     if(!is_in){
         fprintf(stderr, "free: Inappropriate pointer (%s:%d)\n", file, line);
         exit(2);
-
     }
-
-    // if the chunk is already free
-    header *chunk = (header *)((char *) ptr - sizeof(header)); // getting the header of the given chunk
-
+    header *chunk = (header *)((char *) ptr - sizeof(header));
     if (chunk -&gt; is_allocated == 0) {
         fprintf(stderr, "free: Inappropriate pointer (%s:%d)\n", file, line);
         exit(2);
     }
-
     chunk -&gt; is_allocated = 0;
-
-    // finding the previous header
     header *c = (header*) heap.bytes; 
     header *p = NULL;
-
     while((char*)c &lt; (char*)chunk){
         p = c;
         c = (header *)((char *)p + sizeof(header) + p -&gt; size );
     }
-
     if(p != NULL && p-&gt;is_allocated == 0){            
         p -&gt;size += chunk -&gt; size + sizeof(header);      
         chunk = p;        
     }
-    header *next = (header *) ((char *)(chunk) + sizeof(header) + chunk -&gt; size); // !!!!check if you are inside heap !!!!
-
-    //
+    header *next = (header *) ((char *)(chunk) + sizeof(header) + chunk -&gt; size);
     while ((char*)next &lt; heap.bytes + MEMLENGTH - sizeof(header) && next-&gt;is_allocated == 0) {
-
-        if (((char *)next &gt;= heap.bytes + MEMLENGTH)){
-            break;
-        }
-        //int tempsize = next -&gt; size;
+        if (((char *)next &gt;= heap.bytes + MEMLENGTH)){ break; }
         chunk -&gt; size += sizeof(header) + next -&gt; size;
         next = (header *) ((char *)(chunk) + sizeof(header) + chunk -&gt; size);
-            
     }
-
 }
 
-
 void leak_report(){
-
     header *h = head;
-
     int memory = 0;
     int chunks = 0;
-
     while((char*)h &lt; heap.bytes + MEMLENGTH){
-
         if(h -&gt; is_allocated == 1){
             memory += h -&gt; size;
             chunks += 1;
         }
         h = (header *)((char *)h + sizeof(header) + h -&gt; size );
-
     }
     if(chunks &gt; 0){
         fprintf(stderr, "mymalloc: %d bytes leaked in %d objects\n", memory, chunks);
     }
-   
-
 }</div>
             <div id="mymalloc_h" class="code-content">#ifndef _MYMALLOC_H
 #define _MYMALLOC_H
@@ -341,68 +221,46 @@ void leak_report(){
 void * mymalloc(size_t size, char *file, int line);
 void   myfree(void *ptr, char *file, int line);
 
-
 #endif</div>
             <div id="Makefile" class="code-content">all: memgrind memtest Test1 Test2 Test3 Test4_1 Test4_2 Test4_3 Test5
-
 memgrind: memgrind.o mymalloc.o
 	gcc memgrind.o mymalloc.o -o memgrind
-
 memtest: memtest.o mymalloc.o
 	gcc memtest.o mymalloc.o -o memtest
-
 Test1: Test1.o mymalloc.o
 	gcc Test1.o mymalloc.o -o Test1
-
 Test2: Test2.o mymalloc.o
 	gcc Test2.o mymalloc.o -o Test2
-
 Test3: Test3.o mymalloc.o
 	gcc Test3.o mymalloc.o -o Test3
-
 Test4_1: Test4_1.o mymalloc.o
 	gcc Test4_1.o mymalloc.o -o Test4_1
-
 Test4_2: Test4_2.o mymalloc.o
 	gcc Test4_2.o mymalloc.o -o Test4_2
-
 Test4_3: Test4_3.o mymalloc.o
 	gcc Test4_3.o mymalloc.o -o Test4_3
-
 Test5: Test5.o mymalloc.o
 	gcc Test5.o mymalloc.o -o Test5
-
-
 mymalloc.o: mymalloc.c mymalloc.h
 	gcc -c mymalloc.c
-
 memgrind.o: memgrind.c mymalloc.h
 	gcc -c memgrind.c
-
 memtest.o: memtest.c mymalloc.h
 	gcc -c memtest.c
-
 Test1.o: Test1.c mymalloc.h
 	gcc -c Test1.c
-
 Test2.o: Test2.c mymalloc.h
 	gcc -c Test2.c
-
 Test3.o: Test3.c mymalloc.h
 	gcc -c Test3.c
-
 Test4_1.o: Test4_1.c mymalloc.h
 	gcc -c Test4_1.c
-
 Test4_2.o: Test4_2.c mymalloc.h
 	gcc -c Test4_2.c
-
 Test4_3.o: Test4_3.c mymalloc.h
 	gcc -c Test4_3.c
-
 Test5.o: Test5.c mymalloc.h
 	gcc -c Test5.c
-
 clean:
 	rm -f *.o mymalloc memgrind memtest Test1 Test2 Test3 Test4_1 Test4_2 Test4_3 Test5</div>
 
@@ -421,160 +279,97 @@ clean:
             <div id="Test1_c" class="code-content active">#include &lt;stdio.h&gt;
 #include &lt;stdlib.h&gt;
 #include &lt;string.h&gt;
-
 #include "mymalloc.h"
-
 int main(){
-
     char *a = malloc(500);
     memset(a, 'A', 500);
-
     char *b = malloc(500);
     memset(b, 'B', 500);
-
     char *c = malloc(500);
     memset(c, 'C', 500);
-
-    int overlap = 0; // 0 = overlap no found
+    int overlap = 0;
     for(int i = 0; i &lt; 500; i++){
         if(a[i] != 'A' || b[i] != 'B' || c[i] != 'C'){
             overlap = 1;
             break;
         }
-
     }
- 
     if(overlap == 1){
         printf("Overlap Detected\n");
     }else {
         printf("No Overlap Detected\n");
-
     }
-
     free(a);
     free(b);
     free(c);
-    
     return 0;
 }</div>
             <div id="Test2_c" class="code-content">#include &lt;stdio.h&gt;
 #include &lt;stdlib.h&gt;
 #include &lt;string.h&gt;
-
 #include "mymalloc.h"
-
 int main(){
-
     char *p = malloc(4000);
     free(p);
-
-    char *p2 = malloc(2000); // if free deallocated memory this would run, if not our heap won't be able to 
-                             // provide another chunk of 2000 bytes because limit is 4098.
+    char *p2 = malloc(2000);
     free(p2);
     return 0;
 }</div>
             <div id="Test3_c" class="code-content">#include &lt;stdio.h&gt;
 #include &lt;stdlib.h&gt;
 #include &lt;string.h&gt;
-
 #include "mymalloc.h"
-
 int main(){
-
     char *a1 = malloc(1000);
     char *a2 = malloc(1000);
     char *a3 = malloc(1000);
     char *a4 = malloc(1000);
-    // not heap is about full
-
     free(a1);
     free(a2);
-    // now if both chunks were coalesced we can put another chunk which is big enough 
-
     char *a5 = malloc(2000);
     free(a5);
     free(a3);
     free(a4);
-
     return 0;
 }</div>
             <div id="Test4_1_c" class="code-content">#include &lt;stdio.h&gt;
 #include &lt;stdlib.h&gt;
 #include &lt;string.h&gt;
-
 #include "mymalloc.h"
-
 int main(){
-
     char *a = malloc(1000);
     int x;
     free(&x);
-/*
-output: 
-free: Inappropriate pointer (Test4_1.c:11)
-mymalloc: 1000 bytes leaked in 1 objects
-*/
-
     return 0;
 }</div>
             <div id="Test4_2_c" class="code-content">#include &lt;stdio.h&gt;
 #include &lt;stdlib.h&gt;
 #include &lt;string.h&gt;
-
 #include "mymalloc.h"
-
 int main(){
-
     int *a1 = malloc(sizeof(int) * 2);
     free(a1 + 1);
-/*
-output 
-free: Inappropriate pointer (Test4_2.c:10)
-mymalloc: 8 bytes leaked in 1 objects
-*/
-
     return 0;
 }</div>
             <div id="Test4_3_c" class="code-content">#include &lt;stdio.h&gt;
 #include &lt;stdlib.h&gt;
 #include &lt;string.h&gt;
-
 #include "mymalloc.h"
-
 int main(){
-
     char *a2 = malloc(1000);
     char *q = a2;
     free(a2);
     free(q);
-/*
-output 
-free: Inappropriate pointer (Test4_3.c:12)
-*/
     return 0;
 }</div>
             <div id="Test5_c" class="code-content">#include &lt;stdio.h&gt;
 #include &lt;stdlib.h&gt;
 #include &lt;string.h&gt;
-
 #include "mymalloc.h"
-
 int main(){
-
-    
- 
     char *a1 = malloc(500);
-    char *a2 = malloc(1500); // we are not going to free this chunk
-
+    char *a2 = malloc(1500);
     free(a1);
-
-
-
-/* output:
-    mymalloc: 1504 bytes leaked in 1 objects
-    (because it is multiple of 8)
-*/
-
     return 0;
 }</div>
             <div id="memgrind_c" class="code-content">#include &lt;stdio.h&gt;
@@ -582,207 +377,97 @@ int main(){
 #include &lt;string.h&gt;
 #include &lt;sys/time.h&gt;
 #include "mymalloc.h"
-
-// for linkedlist
-typedef struct Node {
-    int value;
-    struct Node *next;
-}Node;
-
-// for binary tree
-typedef struct Tree {
-    int value;
-    struct Tree *right;
-    struct Tree *left;
-}Tree;
-
+typedef struct Node { int value; struct Node *next; } Node;
+typedef struct Tree { int value; struct Tree *right; struct Tree *left; } Tree;
 void freeTree(Tree *root){
-    if(!root){
-        return;
-    }
+    if(!root){ return; }
     freeTree(root -&gt; left);
     freeTree(root -&gt; right);
     free(root);
 }
-
 int main(){
-
-    // The first test
-    // 1. malloc() and immediately free() a 1-byte object, 120 times.
-
     struct timeval start, end;
     long seconds, useconds;
-
     gettimeofday(&start, NULL);
-
-
     for(int t = 0; t &lt; 50; t++){
         for(int i = 0; i &lt; 120; i++){
             char *a = malloc(1);
-            if(a == NULL){
-                fprintf(stderr, "Memory allocation failed");
-                continue;
-
-            }
+            if(a == NULL){ fprintf(stderr, "Memory allocation failed"); continue; }
             free(a);
         }
     }
-
-
-    // second test
-    // Use malloc() to get 120 1-byte objects, storing the pointers in an array, then use free() to
-    // deallocate the chunks.
-
     gettimeofday(&end, NULL);
     seconds = end.tv_sec  - start.tv_sec;
     useconds = end.tv_usec - start.tv_usec;
     double time = (seconds * 1000000.0 + useconds) / 1000000.0;
-
     double avg_time = time/50;
-
     printf("The average time for first workload is %1.8f seconds.\n", avg_time);
-
     gettimeofday(&start, NULL);
     for(int t = 0; t &lt; 50; t++){
-
         char *p[120];
         for(int i = 0; i &lt; 120; i++){
-
             p[i] = malloc(1);
-            if(p[i] == NULL){
-                fprintf(stderr, "Memory allocation failed");
-                continue;
-
-            }            
-
+            if(p[i] == NULL){ fprintf(stderr, "Memory allocation failed"); continue; }            
         }
-        for(int i = 0; i &lt; 120; i++){
-                free(p[i]);
-        }
+        for(int i = 0; i &lt; 120; i++){ free(p[i]); }
     }
-
-    // Third test
-    /*
-    Create an array of 120 pointers. Repeatedly make a random choice between (a) allocating a
-    1-byte object and adding the pointer to the array and (b) deallocating a random previously
-    allocated object (if any). Once 120 allocations have been performed, deallocate all remaining
-    objects.
-    */
-
     gettimeofday(&end, NULL);
     seconds = end.tv_sec  - start.tv_sec;
     useconds = end.tv_usec - start.tv_usec;
     double time2 = (seconds * 1000000.0 + useconds) / 1000000.0;
-
     double avg_time2 = time2 / 50;
-
     printf("The average time for second workload is %1.8f seconds.\n", avg_time2);
-
-
-
     gettimeofday(&start, NULL);
-
     for(int t = 0; t &lt; 50; t++){
-
         char *q[120];
         int alreay_free[120] = {0};
-
-        int up = 3;
-        int low = 0;
-
+        int up = 3, low = 0;
         for(int i = 0; i &lt; 120; i++){
-
             q[i] = malloc(1);
-
             if(i == up){ 
-                
                 for(int j = low; j &lt; i; j++){
-                    int min = 0;
-                    int max = up;
-                    int random = (rand() % (max - min + 1)) + min;
-
-                    if(alreay_free[random] == 0){// check if the current chunk is already free
-                        free(q[random]);
-                        alreay_free[random] = 1; // mark the index which is free
-                    }
+                    int random = (rand() % (up - 0 + 1)) + 0;
+                    if(alreay_free[random] == 0){ free(q[random]); alreay_free[random] = 1; }
                 }
-
-                // pick any number between 1 and 4 and after that number of iteration, we will free the random chunks
-                int min = 1;
-                int max = 4;
-                int random2 = (rand() % (max - min + 1)) + min;
-
+                int random2 = (rand() % (4 - 1 + 1)) + 1;
                 low = up; 
                 up += random2;
-                
             }
-
         }
-
-
-        // freeing rest pointers 
         for(int i = 0; i &lt; 120; i++){
-
-            if(alreay_free[i] == 0){
-                free(q[i]);
-            }
+            if(alreay_free[i] == 0){ free(q[i]); }
         }
     }
     gettimeofday(&end, NULL);
     seconds = end.tv_sec  - start.tv_sec;
     useconds = end.tv_usec - start.tv_usec;
     double time3 = (seconds * 1000000.0 + useconds) / 1000000.0;
-
     double avg_time3 = time3 / 50;
-
-    printf("The average time for second workload is %1.8f seconds.\n", avg_time3);
-
-
-    // Fourth test
-    // make a linked list of 100 nodes and allocate 16 bytes to every node, and free them.
-
-
+    printf("The average time for third workload is %1.8f seconds.\n", avg_time3);
     gettimeofday(&start, NULL);
-
     for(int j = 0; j &lt; 50; j++){
-
         Node *head = NULL;
-       
-        //making linked list 100 times size = 16 bytes every node contains value 10
         for (int i = 0; i &lt; 100; i++) {
             Node* node = (Node*)malloc(sizeof(Node));
             node -&gt; value = 10;
             node -&gt; next = head;
             head = node;
-
         }
-
         while(head != NULL){
             Node *next = head -&gt; next;
             free(head);
             head = next;
         }
-
     }
     gettimeofday(&end, NULL);
     seconds = end.tv_sec  - start.tv_sec;
     useconds = end.tv_usec - start.tv_usec;
     double time4 = (seconds * 1000000.0 + useconds) / 1000000.0;
-
     double avg_time4 = time4/50;
-
     printf("The average time for fourth workload is %1.8f seconds.\n", avg_time4);
-
-
-    // Fifth test
-    // Making a binary tree with 100 nodes total, including left and right child for every node and free all 
-    // nodes 
-
     gettimeofday(&start, NULL);
-
     for(int j = 0; j &lt; 50; j++){
         Tree* nodes[100];
-
         for(int i = 0; i &lt; 100; i++){
             nodes[i] = malloc(sizeof(Tree));
             nodes[i]  -&gt; value = i;
@@ -790,17 +475,10 @@ int main(){
             nodes[i] -&gt; right = NULL;
         }
         for(int i = 0; i &lt; 100; i++){
-
-            int left = (i * 2) + 1; // right child 
-            int right = (i * 2) + 2; // left child
-
-            if(left &lt; 100){
-                nodes[i]  -&gt; left = nodes[left];
-            }
-            if(right &lt; 100){
-                nodes[i]  -&gt; right = nodes[right];
-            }
-
+            int left = (i * 2) + 1;
+            int right = (i * 2) + 2;
+            if(left &lt; 100){ nodes[i]  -&gt; left = nodes[left]; }
+            if(right &lt; 100){ nodes[i]  -&gt; right = nodes[right]; }
         }
         freeTree(nodes[0]);
     }
@@ -808,41 +486,28 @@ int main(){
     seconds = end.tv_sec  - start.tv_sec;
     useconds = end.tv_usec - start.tv_usec;
     double time5 = (seconds * 1000000.0 + useconds) / 1000000.0;
-
     double avg_time5 = time5/50;
-
     printf("The average time for fifth workload is %1.8f seconds.\n", avg_time5);
-
     return 0;
-
 }</div>
             <div id="memtest_c" class="code-content">#include &lt;stdio.h&gt;
 #include &lt;stdlib.h&gt;
 #include &lt;unistd.h&gt;
 #include &lt;string.h&gt;
-
-
-// Compile with -DREALMALLOC to use the real malloc() instead of mymalloc()
 #ifndef REALMALLOC
 #include "mymalloc.h"
 #endif
-
-// Compile with -DLEAK to leak memory
 #ifndef LEAK
 #define LEAK 0
 #endif
-
 #define MEMSIZE 4096
 #define HEADERSIZE 8
 #define OBJECTS 64
 #define OBJSIZE (MEMSIZE / OBJECTS - HEADERSIZE)
-
 int main(int argc, char **argv)
 {
 	char *obj[OBJECTS];
 	int i, j, errors = 0;
-	
-	// fill memory with objects
 	for (i = 0; i &lt; OBJECTS; i++) {
 		obj[i] = malloc(OBJSIZE);
 		if (obj[i] == NULL) {
@@ -850,13 +515,9 @@ int main(int argc, char **argv)
 		    exit(1);
 		}
 	}
-	
-	// fill each object with distinct bytes
 	for (i = 0; i &lt; OBJECTS; i++) {
 		memset(obj[i], i, OBJSIZE);
 	}
-	
-	// check that all objects contain the correct bytes
 	for (i = 0; i &lt; OBJECTS; i++) {
 		for (j = 0; j &lt; OBJSIZE; j++) {
 			if (obj[i][j] != i) {
@@ -865,26 +526,19 @@ int main(int argc, char **argv)
 			}
 		}
 	}
-
-	// free all objects
 	if (!LEAK) {
 	    for (i = 0; i &lt; OBJECTS; i++) {
-		free(obj[i]);
+		    free(obj[i]);
 	    }
 	}
-	
 	printf("%d incorrect bytes\n", errors);
-	
 	return EXIT_SUCCESS;
 }</div>
         </section>
 
         <section class="section fade-in-section">
             <h2>Live Demo</h2>
-            <div class="error-note">
-                <strong>Note:</strong> This live demo uses a third-party API to compile code. Due to browser security policies (CORS), the "Compile & Run" feature may show a "Failed to fetch" error when this page is opened as a local file. For the demo to work correctly, please host this file on a web server (like GitHub Pages).
-            </div>
-            <p>Select a test case from the dropdown and click "Compile & Run". This tool simulates running a single test case by combining the allocator source code with the selected file for compilation. <strong>It does not run the actual Makefile.</strong></p>
+            <p>Select a test case from the dropdown and click "Compile & Run". This interactive demo uses a WebAssembly-based C compiler (TCC-JS) to compile and run your code directly in the browser.</p>
             <div class="compiler-controls">
                 <select id="test-selector">
                     <option value="Test1_c">Test 1</option>
@@ -897,7 +551,7 @@ int main(int argc, char **argv)
                     <option value="memgrind_c">Stress Test (memgrind)</option>
                     <option value="memtest_c">Memory Test (memtest)</option>
                 </select>
-                <button id="runBtn" class="run-button" onclick="runCode()">Compile & Run</button>
+                <button id="runBtn" class="run-button">Compile & Run</button>
             </div>
             <h3>Output:</h3>
             <pre id="output">Compiler output will appear here...</pre>
@@ -913,10 +567,8 @@ int main(int argc, char **argv)
             const tabContainer = document.getElementById(tabContainerId).parentElement;
             const tabcontent = tabContainer.querySelectorAll('.code-content');
             tabcontent.forEach(tc => tc.style.display = 'none');
-            
             const tabbuttons = document.getElementById(tabContainerId).querySelectorAll('.tab-button');
             tabbuttons.forEach(tb => tb.classList.remove('active'));
-            
             document.getElementById(tabName).style.display = 'block';
             evt.currentTarget.classList.add('active');
         }
@@ -926,7 +578,6 @@ int main(int argc, char **argv)
                 e.preventDefault();
                 const tabName = e.target.dataset.tabName;
                 const tabContainerId = e.target.dataset.tabContainer;
-                
                 const tabButtons = document.getElementById(tabContainerId).querySelectorAll('.tab-button');
                 for (let btn of tabButtons) {
                     if (btn.getAttribute('onclick').includes(`'${tabName}'`)) {
@@ -942,7 +593,6 @@ int main(int argc, char **argv)
             document.querySelector('#core-tabs .tab-button').click();
             document.querySelector('#test-tabs .tab-button').click();
 
-            // Intersection Observer for on-scroll animations
             const sections = document.querySelectorAll('.fade-in-section');
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
@@ -950,72 +600,60 @@ int main(int argc, char **argv)
                         entry.target.classList.add('is-visible');
                     }
                 });
-            }, {
-                threshold: 0.1
-            });
+            }, { threshold: 0.1 });
+            sections.forEach(section => { observer.observe(section); });
 
-            sections.forEach(section => {
-                observer.observe(section);
-            });
-        });
-        
-        async function runCode() {
             const runButton = document.getElementById('runBtn');
             const outputDiv = document.getElementById('output');
             const selector = document.getElementById('test-selector');
-            
-            runButton.disabled = true;
-            runButton.innerText = 'Compiling...';
-            outputDiv.innerText = 'Sending code to compiler...';
-            
-            const selectedTestId = selector.value;
-            
-            const mymalloc_h_code = document.getElementById('mymalloc_h').innerText;
-            const mymalloc_c_code = document.getElementById('mymalloc_c').innerText.replace('#include "mymalloc.h"', '');
-            const test_file_code = document.getElementById(selectedTestId).innerText.replace('#include "mymalloc.h"', '');
-            
-            const full_source_code = mymalloc_h_code + "\n" + mymalloc_c_code + "\n" + test_file_code;
+            let tcc;
 
-            const apiUrl = 'https://api.paiza.io/runners/create';
-            const params = new URLSearchParams();
-            params.append('source_code', full_source_code);
-            params.append('language', 'c');
-            params.append('api_key', 'guest');
-
-            try {
-                const createResponse = await fetch(apiUrl, { method: 'POST', body: params });
-                const createData = await createResponse.json();
-                
-                if (createData.id) {
-                    outputDiv.innerText = 'Code submitted. Waiting for results...';
-                    
-                    let status = 'running';
-                    let resultData;
-                    while(status === 'running') {
-                        await new Promise(resolve => setTimeout(resolve, 1000));
-                        const showResponse = await fetch(`https://api.paiza.io/runners/get_details?id=${createData.id}&api_key=guest`);
-                        resultData = await showResponse.json();
-                        status = resultData.status;
-                    }
-
-                    let output = '';
-                    if(resultData.build_stderr) output += `--- Compiler Errors ---\n${resultData.build_stderr}\n\n`;
-                    if(resultData.stderr) output += `--- Program Errors (stderr) ---\n${resultData.stderr}\n\n`;
-                    if(resultData.stdout) output += `--- Program Output (stdout) ---\n${resultData.stdout}`;
-                    
-                    outputDiv.innerText = output.trim() || "Execution complete with no output.";
-
-                } else {
-                    outputDiv.innerText = `Error submitting code: ${createData.error || 'Unknown error'}`;
-                }
-
-            } catch (error) {
-                outputDiv.innerText = `An unexpected error occurred: ${error.message}\n\n(This can happen if you are running this page as a local file. Try hosting it online.)`;
-            } finally {
+            // Initialize the TCC compiler
+            TCC.initialize().then(instance => {
+                tcc = instance;
                 runButton.disabled = false;
-                runButton.innerText = 'Compile & Run';
-            }
-        }
+                outputDiv.innerText = "Compiler is ready. Select a test and run.";
+            }).catch(err => {
+                 outputDiv.innerText = "Failed to initialize the in-browser compiler.";
+                 console.error(err);
+            });
+
+            runButton.onclick = async () => {
+                if (!tcc) {
+                    outputDiv.innerText = "Compiler is not ready. Please wait.";
+                    return;
+                }
+                runButton.disabled = true;
+                runButton.innerText = 'Compiling...';
+                outputDiv.innerText = 'Compiling code in browser...';
+
+                const mymalloc_h_code = document.getElementById('mymalloc_h').innerText;
+                const mymalloc_c_code = document.getElementById('mymalloc_c').innerText.replace(/#include "mymalloc.h"/g, '');
+                const selectedTestId = selector.value;
+                const test_file_code = document.getElementById(selectedTestId).innerText.replace(/#include "mymalloc.h"/g, '');
+
+                const full_source_code = mymalloc_h_code + "\n" + mymalloc_c_code + "\n" + test_file_code;
+                
+                try {
+                    const compilationResult = tcc.compile(full_source_code);
+                    if (compilationResult.byteLength > 0) {
+                        outputDiv.innerText = 'Compilation successful. Running...';
+                        const { stdout, stderr, exit_code } = await tcc.run(compilationResult, []);
+                        let output = `--- Program Output (stdout) ---\n${stdout || '(no output)'}\n\n`;
+                        output += `--- Program Errors (stderr) ---\n${stderr || '(no errors)'}\n\n`;
+                        output += `--- Exit Code: ${exit_code} ---`;
+                        outputDiv.innerText = output;
+                    } else {
+                        outputDiv.innerText = `--- Compilation Failed ---\n${tcc.log}`;
+                    }
+                } catch (e) {
+                    outputDiv.innerText = `An unexpected error occurred during compilation or execution:\n${e.message}`;
+                } finally {
+                    runButton.disabled = false;
+                    runButton.innerText = 'Compile & Run';
+                }
+            };
+        });
     </script>
 </body>
 </html>
