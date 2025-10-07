@@ -52,7 +52,7 @@ To clean up all compiled object files and executables:
 
 
 make clean
-```bash
+```
 ---
 Author
 
