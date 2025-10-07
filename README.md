@@ -1,4 +1,4 @@
-# c-memory-allocator
+# C-memory-allocator
 
 # Efficient Memory Allocation in C (mymalloc)
 
