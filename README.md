@@ -44,7 +44,7 @@ The allocator was validated using a comprehensive suite of tests to ensure corre
 To compile all test executables, use the provided Makefile:
 ```bash
 make all
-
+```
 To run a specific test:
 
 ```bash
