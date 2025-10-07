@@ -7,8 +7,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
-    <!-- Include the TCC-JS compiler library -->
-    <script src="https://cdn.jsdelivr.net/npm/tcc-js@0.0.12/dist/tcc-js.js"></script>
     <style>
         :root {
             --primary-color: #4A90E2;
@@ -20,6 +18,11 @@
             --border-color: #E4E7EB;
             --code-bg: #282c34;
             --code-text: #abb2bf;
+            --terminal-bg: #212529;
+            --terminal-header: #343a40;
+            --terminal-text: #E0E0E0;
+            --terminal-prompt: #7f8c9b;
+            --terminal-command: #50E3C2;
         }
         html { scroll-behavior: smooth; }
         body { font-family: 'Roboto', sans-serif; line-height: 1.7; margin: 0; padding: 0; background-color: var(--bg-color); color: var(--text-color); }
@@ -46,13 +49,12 @@
         .tab-button.active, .tab-button:hover { color: var(--primary-color); border-bottom: 3px solid var(--primary-color); }
         .code-content { display: none; padding: 1.5rem; background: var(--code-bg); color: var(--code-text); border-radius: 0 0 8px 8px; height: 450px; overflow-y: auto; font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace; white-space: pre; font-size: 0.9rem; border: 1px solid var(--border-color); border-top: none; }
         .code-content.active { display: block; }
-        .compiler-controls { display: flex; gap: 1rem; align-items: center; margin-bottom: 1.5rem; }
-        #test-selector { flex-grow: 1; padding: 14px; font-size: 1rem; border-radius: 8px; border: 1px solid var(--border-color); background-color: #fff; transition: border-color 0.2s, box-shadow 0.2s; }
-        #test-selector:focus { outline: none; border-color: var(--primary-color); box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.25); }
-        .run-button { padding: 14px 28px; font-size: 1.1rem; font-weight: 600; background: #28a745; color: white; border: none; border-radius: 8px; cursor: pointer; transition: background-color 0.2s, transform 0.1s; }
-        .run-button:hover { background: #218838; transform: translateY(-1px); }
-        .run-button:disabled { background: #aaa; cursor: not-allowed; }
-        #output { background: #212529; color: #50E3C2; padding: 1.5rem; border-radius: 8px; font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace; white-space: pre-wrap; min-height: 50px; }
+        .terminal-window { background: var(--terminal-bg); border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); overflow: hidden; font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace; }
+        .terminal-header { background: var(--terminal-header); padding: 10px 15px; font-size: 0.9rem; color: #adb5bd; border-bottom: 1px solid #495057; }
+        .terminal-body { padding: 1.5rem; line-height: 1.6; font-size: 0.95rem; white-space: pre-wrap; word-break: break-all; }
+        .terminal-body .command { color: var(--terminal-command); }
+        .terminal-body .command::before { content: '$ '; color: var(--terminal-prompt); }
+        .terminal-body .output { color: var(--terminal-text); display: block; margin-top: 0.5rem; margin-bottom: 1.5rem; }
         footer { text-align: center; padding: 2.5rem; color: #6c757d; }
     </style>
 </head>
@@ -537,24 +539,28 @@ int main(int argc, char **argv)
         </section>
 
         <section class="section fade-in-section">
-            <h2>Live Demo</h2>
-            <p>Select a test case from the dropdown and click "Compile & Run". This interactive demo uses a WebAssembly-based C compiler (TCC-JS) to compile and run your code directly in the browser.</p>
-            <div class="compiler-controls">
-                <select id="test-selector">
-                    <option value="Test1_c">Test 1</option>
-                    <option value="Test2_c">Test 2</option>
-                    <option value="Test3_c">Test 3</option>
-                    <option value="Test4_1_c">Test 4 (Part 1)</option>
-                    <option value="Test4_2_c">Test 4 (Part 2)</option>
-                    <option value="Test4_3_c">Test 4 (Part 3)</option>
-                    <option value="Test5_c">Test 5</option>
-                    <option value="memgrind_c">Stress Test (memgrind)</option>
-                    <option value="memtest_c">Memory Test (memtest)</option>
-                </select>
-                <button id="runBtn" class="run-button">Compile & Run</button>
+            <h2>How to Compile & Run</h2>
+            <p>To compile and run this project on your local machine, clone the repository and use the provided Makefile in your terminal.</p>
+            <div class="terminal-window">
+                <div class="terminal-header">bash</div>
+                <div class="terminal-body">
+<span class="command">make all</span>
+<span class="output">gcc -c mymalloc.c
+gcc -c memgrind.c
+gcc memgrind.o mymalloc.o -o memgrind
+gcc -c memtest.c
+gcc memtest.o mymalloc.o -o memtest
+... (compilation for all other tests) ...</span>
+<span class="command">./memgrind</span>
+<span class="output">The average time for first workload is 0.00000214 seconds.
+The average time for second workload is 0.00000188 seconds.
+The average time for third workload is 0.00000204 seconds.
+The average time for fourth workload is 0.00000128 seconds.
+The average time for fifth workload is 0.00000196 seconds.</span>
+<span class="command">make clean</span>
+<span class="output">rm -f *.o mymalloc memgrind memtest Test1 Test2 Test3 Test4_1 Test4_2 Test4_3 Test5</span>
+                </div>
             </div>
-            <h3>Output:</h3>
-            <pre id="output">Compiler output will appear here...</pre>
         </section>
     </div>
 
@@ -602,57 +608,6 @@ int main(int argc, char **argv)
                 });
             }, { threshold: 0.1 });
             sections.forEach(section => { observer.observe(section); });
-
-            const runButton = document.getElementById('runBtn');
-            const outputDiv = document.getElementById('output');
-            const selector = document.getElementById('test-selector');
-            let tcc;
-
-            // Initialize the TCC compiler
-            TCC.initialize().then(instance => {
-                tcc = instance;
-                runButton.disabled = false;
-                outputDiv.innerText = "Compiler is ready. Select a test and run.";
-            }).catch(err => {
-                 outputDiv.innerText = "Failed to initialize the in-browser compiler.";
-                 console.error(err);
-            });
-
-            runButton.onclick = async () => {
-                if (!tcc) {
-                    outputDiv.innerText = "Compiler is not ready. Please wait.";
-                    return;
-                }
-                runButton.disabled = true;
-                runButton.innerText = 'Compiling...';
-                outputDiv.innerText = 'Compiling code in browser...';
-
-                const mymalloc_h_code = document.getElementById('mymalloc_h').innerText;
-                const mymalloc_c_code = document.getElementById('mymalloc_c').innerText.replace(/#include "mymalloc.h"/g, '');
-                const selectedTestId = selector.value;
-                const test_file_code = document.getElementById(selectedTestId).innerText.replace(/#include "mymalloc.h"/g, '');
-
-                const full_source_code = mymalloc_h_code + "\n" + mymalloc_c_code + "\n" + test_file_code;
-                
-                try {
-                    const compilationResult = tcc.compile(full_source_code);
-                    if (compilationResult.byteLength > 0) {
-                        outputDiv.innerText = 'Compilation successful. Running...';
-                        const { stdout, stderr, exit_code } = await tcc.run(compilationResult, []);
-                        let output = `--- Program Output (stdout) ---\n${stdout || '(no output)'}\n\n`;
-                        output += `--- Program Errors (stderr) ---\n${stderr || '(no errors)'}\n\n`;
-                        output += `--- Exit Code: ${exit_code} ---`;
-                        outputDiv.innerText = output;
-                    } else {
-                        outputDiv.innerText = `--- Compilation Failed ---\n${tcc.log}`;
-                    }
-                } catch (e) {
-                    outputDiv.innerText = `An unexpected error occurred during compilation or execution:\n${e.message}`;
-                } finally {
-                    runButton.disabled = false;
-                    runButton.innerText = 'Compile & Run';
-                }
-            };
         });
     </script>
 </body>
